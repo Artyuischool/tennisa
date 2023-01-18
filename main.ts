@@ -13,10 +13,15 @@ input.onButtonPressed(Button.A, function () {
         }
     }
 })
+function apply_force (force: number, x: number, y: number) {
+    if (force == 0) {
+    	
+    }
+}
 function draw () {
     draw_net()
     draw_player(x, y)
-    draw_bal(balx, last_pos_bal_y)
+    draw_bal(balx, baly)
 }
 input.onButtonPressed(Button.AB, function () {
     punch()
@@ -35,7 +40,7 @@ input.onButtonPressed(Button.B, function () {
 })
 function draw_bal (x: number, y: number) {
     led.plot(x, y)
-    if (!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(!(x == last_pos_bal_x && y == last_pos_bal_y)))))))))))))))))))))))))))))))))))) {
+    if (!(x == last_pos_bal_x && y == last_pos_bal_y)) {
         led.unplot(last_pos_bal_x, last_pos_bal_y)
         last_pos_bal_x = x
         last_pos_bal_y = y
@@ -48,9 +53,15 @@ function punch () {
     if (y - 1 == baly && x == balx) {
         baly += -1
     }
+    if (y - 1 == baly && x - 1 == balx) {
+        baly += -1
+    }
+    if (y - 1 == baly && x + 1 == balx) {
+        baly += -1
+    }
 }
-let last_pos_bal_x = 0
 let last_pos_bal_y = 0
+let last_pos_bal_x = 0
 let baly = 0
 let balx = 0
 let y = 0
@@ -63,6 +74,8 @@ x = 2
 y = 4
 balx = 2
 baly = 3
+last_pos_bal_x = 2
+last_pos_bal_y = 3
 basic.forever(function () {
     draw()
 })
